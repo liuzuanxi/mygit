@@ -28,7 +28,7 @@ void TextFileReadByLine(char** argv)
 {
 	char buffer[256];
 //	ifstream in;
-	fstream fFile("C:\\Users\\Administrator\\Desktop\\11.txt", ios::in | ios::out);
+	fstream fFile(argv[1], ios::in | ios::out);
 //	in.open("argv[1]",ios::in);
 	while(!fFile.eof())
 	{
