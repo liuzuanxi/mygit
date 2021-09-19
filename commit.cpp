@@ -13,7 +13,7 @@ string if_match[100];
 string match[1000];
 string if_key[3] = { "else if","if","else" };
 string key[40] = { "auto","break","case","char","const","continue","default","double","else","enum","extern","float","for","goto","if","int","long","register","return","short","signed","sizeof","static","struct","switch","typedef","union","unsigned","void","volatile","while" };
-int BruteForce(string t, string p) {
+int bruteforce(string t, string p) {
 	int lenT = t.size();
 	int lenP = p.size();
 	int i, j;
@@ -31,41 +31,38 @@ int BruteForce(string t, string p) {
 	}
 	return 0;
 }
-void TextFileReadByLine(char** argv)
+void readbyline(char** argv)
 {
 	char buffer[256];
-	//	ifstream in;
 	fstream fFile(argv[1], ios::in | ios::out);
-	//	in.open("argv[1]",ios::in);
 	while (!fFile.eof())
 	{
 		fFile.getline(buffer, 256, '\n');
 		int lenth = strlen(buffer);
 		for (int i = 0;i < 31;i++) {
-			if (BruteForce(buffer, key[i])) {
+			if (bruteforce(buffer, key[i])) {
 				match[cnt1] = key[i];
 				cnt1++;
 			}
 		}
 		for (int i = 0;i < 3;i++) {
-			if (BruteForce(buffer, if_key[i]) && if_key[i] != "else if") {
+			if (bruteforce(buffer, if_key[i]) && if_key[i] != "else if") {
 				if_match[cnt2] = if_key[i];
 				cnt2++;
 			}
-			if (BruteForce(buffer, if_key[i]) && if_key[i] == "else if") {
+			if (bruteforce(buffer, if_key[i]) && if_key[i] == "else if") {
 				if_match[cnt2] = if_key[i];
 				cnt2++;
 				break;
 			}
 		}
-		//cout<<buffer<<endl;
 	}
 	fFile.close();
 }
 void level_2(string str[]);
 void level_3and4(char** argv);
 int main(int argc, char** argv) {
-	TextFileReadByLine(argv);
+	readbyline(argv);
 	cout << "total num:" << cnt1 << endl;
 	char level = *argv[2];
 	switch (level) {
