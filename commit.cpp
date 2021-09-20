@@ -12,8 +12,8 @@ int cnt2 = 0;
 string if_match[100];
 string match[1000];
 string if_key[3] = { "else if","if","else" };
-string key[40] = { "auto","break","case","char","const","continue",
-					"default","double","else","enum","extern","float"
+string key[40] = { "auto","break","case","char","const","continue"
+					,"default","double","else","enum","extern","float"
 					,"for","goto","if","int","long","register","return"
 					,"short","signed","sizeof","static","struct","switch"
 					,"typedef","union","unsigned","void","volatile","while" };
