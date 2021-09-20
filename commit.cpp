@@ -12,7 +12,11 @@ int cnt2 = 0;
 string if_match[100];
 string match[1000];
 string if_key[3] = { "else if","if","else" };
-string key[40] = { "auto","break","case","char","const","continue","default","double","else","enum","extern","float","for","goto","if","int","long","register","return","short","signed","sizeof","static","struct","switch","typedef","union","unsigned","void","volatile","while" };
+string key[40] = { "auto","break","case","char","const","continue",
+					"default","double","else","enum","extern","float"
+					,"for","goto","if","int","long","register","return"
+					,"short","signed","sizeof","static","struct","switch"
+					,"typedef","union","unsigned","void","volatile","while" };
 int bruteforce(string t, string p) {									//按字符比对函数，参数分别为待比对字符串和模板字符串
 	int lenT = t.size();
 	int lenP = p.size();
@@ -43,6 +47,17 @@ void readbyline(char** argv)											//读入命令行参数
 			if (bruteforce(buffer, key[i])) {							//调用比对函数
 				match[cnt1] = key[i];
 				cnt1++;
+			}
+		}
+		for (int i = 0;i < 3;i++) {
+			if (bruteforce(buffer, if_key[i]) && if_key[i] != "else if") {
+				if_match[cnt2] = if_key[i];
+				cnt2++;
+			}
+			if (bruteforce(buffer, if_key[i]) && if_key[i] == "else if") {
+				if_match[cnt2] = if_key[i];
+				cnt2++;
+				break;
 			}
 		}
 	}
@@ -90,6 +105,11 @@ void level_2(string str[]) {
 		else if (str[i] == "case")
 			temp2[tmp]++;												//统计case
 	}
+	cout << "switch num:" << temp1 << endl;
+	cout << "case num:";
+	for (int i = 1;i <= tmp;i++)
+		cout << temp2[i] << " ";
+	cout << endl;
 }
 void level_3and4(char** argv) {			
 	level_2(match);
